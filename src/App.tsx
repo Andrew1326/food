@@ -1,26 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { lazy, Suspense } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { TRoute } from './appTypes';
+import Navbar from './components/navbar/Navbar';
+import CenteredLoader from './components/shared/loader/CenteredLoader';
+import ScrollToTop from './components/shared/scrollToTop/ScrollToTop';
+import RecipeProvider from './contexts/RecipeContext';
+import SavedProvider from './contexts/SavedContext';
 
-function App() {
+//* lazy import
+const Home = lazy(() => import('./components/screens/home/Home'))
+const Dishes = lazy(() => import('./components/screens/dishes/Dishes'))
+const Dish = lazy(() => import('./components/screens/dish/Dish'))
+const Pairing = lazy(() => import('./components/screens/pairing/Pairing'))
+const Wines = lazy(() => import('./components/screens/wines/Wines'))
+const Saved = lazy(() => import('./components/screens/saved/Saved'))
+const Search = lazy(() => import('./components/screens/search/Search'))
+const SearchResults = lazy(() => import('./components/screens/searchResults/SearchResults'))
+const NotFound = lazy(() => import('./components/screens/notFound/NotFound'))
+
+//* routes
+const routes: TRoute[] = [
+  {to: '/', elem: <Home />},
+  {to: '/dishes', elem: <Dishes />, link: 'Dishes'},
+  {to: '/dishes/:id', elem: <Dish />},
+  {to: '/pairing', elem: <Pairing />, link: 'Pairing'},
+  {to: '/wines', elem: <Wines />, link: 'Wines'},
+  {to: '/saved', elem: <Saved />, link: 'Saved'},
+  {to: '/saved/:id', elem: <Dish />},
+  {to: '/search', elem: <Search />},
+  {to: '/search/results', elem: <SearchResults />},
+  {to: '/search/results/:id', elem: <Dish />},
+  {to: '*', elem: <NotFound />}
+]
+
+//* links
+const pages = routes.filter(el => el.link)
+export const links = pages.map(el => ({to: el.to, link: el.link}))
+
+const App = (): JSX.Element => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+    <SavedProvider>
+    <Navbar />
+    <RecipeProvider>
+    <Suspense fallback={<CenteredLoader />}>
+      <ScrollToTop />
+      <Routes>
+        {
+          routes.map((el, i) => <Route key={i} path={el.to} element={el.elem} />)
+        }
+      </Routes>
+    </Suspense>
+    </RecipeProvider>
+    </SavedProvider>
+    </>
+  )
 }
 
-export default App;
+export default App
