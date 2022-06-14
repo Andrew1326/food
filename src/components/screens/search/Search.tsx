@@ -93,7 +93,7 @@ const Search = (): JSX.Element => {
                     </FormControl>
                 </Stack>
                 <Center marginTop={['4%', '2%']}>
-                    <Button type='submit' w='50%' colorScheme='linkedin'>search</Button>
+                    <Button type='submit' w='50%' colorScheme='linkedin' _focus={{border: 'none'}}>search</Button>
                 </Center>
             </form>
             </Box>

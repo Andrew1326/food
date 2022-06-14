@@ -20,7 +20,7 @@ const ScrollToTopBtn = (): JSX.Element => {
     const scroll = (): void => setScrollNeeded(true)
 
     return (
-        <Button colorScheme='teal' borderRadius='50%' pos='fixed' bottom='0' right='0' m='0 2% 2% 0' onClick={scroll}><ArrowUpIcon /></Button>
+        <Button colorScheme='teal' borderRadius='50%' pos='fixed' bottom='0' right='0' m='0 2% 2% 0' _focus={{border: 'none'}} onClick={scroll}><ArrowUpIcon /></Button>
     )
 }
 

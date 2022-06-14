@@ -42,7 +42,7 @@ const Dishes = (): JSX.Element => {
                     <Input textAlign='center' placeholder='Enter tags...' />
                 </FormControl>}
                     />
-                    <Button type='submit' colorScheme='blue'>search</Button>
+                    <Button type='submit' colorScheme='blue' _focus={{border: 'none'}}>search</Button>
                 </HStack>
                 </form>
                 <Image src={require('../../../images/pizza.png')} alt='pizza' w={['100px', '150px', '200px']} h='auto' marginTop={['10%', 0]} />

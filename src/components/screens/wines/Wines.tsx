@@ -73,7 +73,7 @@ const WinePairing = (): JSX.Element => {
                     }     
                     </Stack>
                     <Center marginTop={['4%', '2%']}>
-                        <Button type='submit' colorScheme='facebook' w={['100%', '30%']}>search</Button>
+                        <Button type='submit' colorScheme='facebook' w={['100%', '30%']} _focus={{border: 'none'}}>search</Button>
                     </Center>
                 </form>
                 {

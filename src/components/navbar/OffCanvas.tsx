@@ -9,7 +9,7 @@ const OffCanvas = ({isOpen, onClose}: {isOpen: boolean, onClose: () => void}): J
             <DrawerOverlay />
             <DrawerContent color='gray.700'>
                 <Box marginTop='15%'>
-                    <DrawerCloseButton  marginTop='18%' />
+                    <DrawerCloseButton marginTop='18%' _focus={{border: 'none'}} />
                     <DrawerHeader>Pages:</DrawerHeader>
                     <DrawerBody>
                         <VStack>

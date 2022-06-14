@@ -51,7 +51,7 @@ const Pairing = (): JSX.Element => {
                     />
                     </Stack>
                     <Center marginTop={['4%', '2%']}>
-                        <Button w={['100%', '30%']} type='submit' colorScheme='teal'>search</Button>
+                        <Button w={['100%', '30%']} type='submit' colorScheme='teal' _focus={{border: 'none'}}>search</Button>
                     </Center>
                 </form>
             {

@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, HStack, useMediaQuery } from '@chakra-ui/react';
+import { Box, Center, Flex, Heading, HStack, useMediaQuery } from '@chakra-ui/react';
 import React from 'react';
 import Links from '../shared/links/Links';
 import { links } from '../../App';
@@ -41,12 +41,14 @@ const Navbar = (): JSX.Element => {
             <Flex direction='row' justifyContent='space-around' alignItems='center'>
                 <HStack spacing='10%'>
                     <HamburgerIcon w={5} h={5} _hover={{cursor: 'pointer'}} onClick={onOpen} />
-                    <Heading size='lg' color='green.400' _hover={{cursor: 'pointer'}} onClick={goToHomePage}><i>Foody</i></Heading>
+                    <Heading w={['80px', '100px']} size='lg' color='green.400' _hover={{cursor: 'pointer'}} onClick={goToHomePage}><i>Foody</i></Heading>
                 </HStack>
                 <Flex w='400px' justifyContent={['space-evenly', 'space-around']} alignItems='center'>
                     <Links links={createResponsiveLinks()} />
                 </Flex>
-                <SearchIcon w={4} h={4} _hover={{cursor: 'pointer'}} onClick={goToSearchPage} />
+                <Center w='40px' _hover={{cursor: 'pointer'}} onClick={goToSearchPage}>
+                    <SearchIcon w={4} h={4} />
+                </Center>
             </Flex>
         </Box>
         <OffCanvas {...offCanvasProps} />

@@ -122,7 +122,7 @@ const Dish = (): JSX.Element => {
             </Box>
             {
                 !recipe.cooking && <Center marginBottom='2%'>
-                <Button w='50%' colorScheme='telegram' onClick={startCooking(recipe)}>start cooking</Button>
+                <Button w='50%' colorScheme='telegram' _focus={{border: 'none'}} onClick={startCooking(recipe)}>start cooking</Button>
             </Center>
             }
             <CardControls recipe={recipe} />
