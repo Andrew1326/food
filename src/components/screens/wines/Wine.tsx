@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import { IProductMatch } from '../dish/dishTypes';
 import { Stack, Box, Image, Text, Center, Heading } from '@chakra-ui/react';
 import useWindow from '../../../hooks/useWindow';
@@ -7,7 +7,7 @@ const Wine = ({data}: {data: IProductMatch}): JSX.Element => {
 
     //* opening item in new window
     const setUrl = useWindow()
-    const viewWine = (url: string) => (): void => setUrl(url)
+    const viewWine = (url: string): MouseEventHandler<HTMLImageElement> => () => setUrl(url)
 
     return (
         <Box paddingTop='3%'>

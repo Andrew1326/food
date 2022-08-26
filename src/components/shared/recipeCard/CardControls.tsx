@@ -1,7 +1,7 @@
 import { DeleteIcon } from '@chakra-ui/icons';
 import { AddIcon } from '@chakra-ui/icons';
 import { Button, Center, useToast, UseToastOptions } from '@chakra-ui/react';
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import { useSaved, useSavedUpdate } from '../../../contexts/SavedContext';
 import { IRecipe } from '../../screens/dish/dishTypes';
 import { ISearchRecipe } from '../../screens/searchResults/searchResultsTypes';
@@ -34,13 +34,13 @@ const CardControls = ({recipe}: {recipe: IRecipe | ISearchRecipe}): JSX.Element 
     const getItemState = (): 'saved' | 'not saved' => saved.filter(el => el.id === recipe.id).length > 0 ? 'saved' : 'not saved'
     
     //* save item
-    const saveItem = (): void => {
+    const saveItem: MouseEventHandler<HTMLButtonElement> = () => {
         setSaved([...saved, recipe])
         toast(savedToast)
     }
 
     //* delete item
-    const deleteItem = (): void => {
+    const deleteItem: MouseEventHandler<HTMLButtonElement> = (): void => {
         setSaved(saved.filter(el => el.id !== recipe.id))
         toast(deletedToast)
     }
@@ -51,7 +51,7 @@ const CardControls = ({recipe}: {recipe: IRecipe | ISearchRecipe}): JSX.Element 
     return (
         <Center>
             {
-                getItemState() === 'saved' ? <Button w='80%' onClick={deleteItem} colorScheme='green' _focus={{border: 'none'}}><DeleteIcon {...iconProps} /></Button> : <Button w='80%' onClick={saveItem} colorScheme='green' _focus={{border: 'none'}}><AddIcon {...iconProps} /></Button>
+                getItemState() === 'saved' ? <Button w='80%' onClick={deleteItem} colorScheme='orange' _focus={{border: 'none'}}><DeleteIcon {...iconProps} /></Button> : <Button w='80%' onClick={saveItem} colorScheme='green' _focus={{border: 'none'}}><AddIcon {...iconProps} /></Button>
             }
         </Center>
     )

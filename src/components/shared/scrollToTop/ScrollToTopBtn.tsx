@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { MouseEventHandler, useEffect, useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import { ArrowUpIcon } from '@chakra-ui/icons';
 
@@ -17,7 +17,7 @@ const ScrollToTopBtn = (): JSX.Element => {
     }, [scrollNeeded])
 
     //* scroll
-    const scroll = (): void => setScrollNeeded(true)
+    const scroll: MouseEventHandler<HTMLButtonElement> = () => setScrollNeeded(true)
 
     return (
         <Button colorScheme='teal' borderRadius='50%' pos='fixed' bottom='0' right='0' m='0 2% 2% 0' _focus={{border: 'none'}} onClick={scroll}><ArrowUpIcon /></Button>

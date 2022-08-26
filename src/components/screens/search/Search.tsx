@@ -92,8 +92,8 @@ const Search = (): JSX.Element => {
                     </Select>
                     </FormControl>
                 </Stack>
-                <Center marginTop={['4%', '2%']}>
-                    <Button type='submit' w='50%' colorScheme='linkedin' _focus={{border: 'none'}}>search</Button>
+                <Center mt={['6%', '4%', '4%']}>
+                    <Button type='submit' w='100%' colorScheme='linkedin' _focus={{border: 'none'}}>search</Button>
                 </Center>
             </form>
             </Box>

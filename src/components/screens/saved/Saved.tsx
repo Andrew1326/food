@@ -24,7 +24,7 @@ const Saved = (): JSX.Element => {
             {
                 saved.length > 0 ? <>
                 <Center>
-                    <Heading size='2xl'>Saved dishes:</Heading>
+                    <Heading size='2xl'>Saved dishes</Heading>
                 </Center>
                 {
                     saved.length > 3 ? <>

@@ -3,7 +3,12 @@ import React from 'react';
 import Links from '../shared/links/Links';
 import { links } from '../../App';
 
-const OffCanvas = ({isOpen, onClose}: {isOpen: boolean, onClose: () => void}): JSX.Element => {
+type TProps = {
+    isOpen: boolean,
+    onClose: () => void
+}
+
+const OffCanvas = ({isOpen, onClose}: TProps): JSX.Element => {
     return (
         <Drawer isOpen={isOpen} onClose={onClose} placement='left'>
             <DrawerOverlay />
@@ -12,8 +17,8 @@ const OffCanvas = ({isOpen, onClose}: {isOpen: boolean, onClose: () => void}): J
                     <DrawerCloseButton marginTop='18%' _focus={{border: 'none'}} />
                     <DrawerHeader>Pages:</DrawerHeader>
                     <DrawerBody>
-                        <VStack>
-                            <Links links={links.sort()} />
+                        <VStack spacing='7%'>
+                            <Links links={links.sort()} closeOffcanvas={onClose} />
                         </VStack>
                     </DrawerBody>
                 </Box>

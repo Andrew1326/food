@@ -1,5 +1,5 @@
 import { Box, Center, Heading, Stack, Text, Image, Button, Flex, VStack, Checkbox, Badge, useToast, UseToastOptions, HStack } from '@chakra-ui/react';
-import React from 'react';
+import React, { ChangeEventHandler, MouseEventHandler } from 'react';
 import CardControls from '../../shared/recipeCard/CardControls';
 import ItemList from './ItemList';
 import { useRecipe, useRecipeUpdate } from '../../../contexts/RecipeContext';
@@ -26,8 +26,21 @@ const Dish = (): JSX.Element => {
     }
 
     //* start cooking
-    const startCooking = (recipe: IRecipe) => (): void => {
+    const startCooking = (recipe: IRecipe): MouseEventHandler<HTMLButtonElement> => () => {
         recipe.cooking = true
+
+        recipe.analyzedInstructions[0].steps.map(el => {
+            el.completed = false
+            return el
+        })
+
+        setRecipe(recipe)
+    }
+
+    //* stop cooking
+    const stopCooking = (recipe: IRecipe): MouseEventHandler<HTMLButtonElement> => () => {
+        recipe.cooking = false
+        
         recipe.analyzedInstructions[0].steps.map(el => {
             el.completed = false
             return el
@@ -40,7 +53,7 @@ const Dish = (): JSX.Element => {
     const getStepsCompletion = (recipe: IRecipe): 'completed' | 'not completed' => recipe.analyzedInstructions[0].steps.every(el => el.completed) ? 'completed' : 'not completed'
 
     //* complete step
-    const completeStep = (recipe: IRecipe, index: number) => (): void => {
+    const completeStep = (recipe: IRecipe, index: number): ChangeEventHandler<HTMLElement> => (): void => {
 
         //* item checked
         let checked = recipe.analyzedInstructions[0].steps[index].completed
@@ -94,7 +107,11 @@ const Dish = (): JSX.Element => {
             </Center>
             <Flex justifyContent='center' alignItems='flex-start' flexDirection='column'>
                 {
-                    recipe.analyzedInstructions[0].steps.map((el, i) => recipe.cooking ? <Checkbox bg={el.completed ? 'green.300' : 'none'} border='2px' borderColor='gray.700' borderRadius='15px' w='100%' m='1% 0 1% 0' p='0 1% 0 1%' isChecked={el.completed} onChange={completeStep(recipe, i)} colorScheme='green' size='lg' key={i}>
+                    recipe.analyzedInstructions[0].steps.map((el, i) => recipe.cooking ? <Checkbox css={`
+                    > span:first-of-type {
+                      box-shadow: unset;
+                    }
+                  `} bg={el.completed ? 'green.300' : 'none'} border='2px' borderColor='gray.700' borderRadius='15px' w='100%' m='1% 0 1% 0' p='0 1% 0 1%' isChecked={el.completed} onChange={completeStep(recipe, i)} colorScheme='green' size='lg' key={i}>
                     <Box m='1% 0 1% 0' paddingLeft='2%' fontSize='2xl'>
                         <span>{i+1}) {el.step}</span>
                         {
@@ -120,11 +137,13 @@ const Dish = (): JSX.Element => {
                 }
             </Flex>
             </Box>
-            {
-                !recipe.cooking && <Center marginBottom='2%'>
-                <Button w='50%' colorScheme='telegram' _focus={{border: 'none'}} onClick={startCooking(recipe)}>start cooking</Button>
+            <Center marginBottom='2%'>
+                {
+                    !recipe.cooking ? <Button w='50%' colorScheme='telegram' _focus={{border: 'none'}} onClick={startCooking(recipe)}>start cooking</Button>
+                    :
+                    <Button w='50%' colorScheme='yellow' _focus={{border: 'none'}} onClick={stopCooking(recipe)}>stop cooking</Button>
+                }
             </Center>
-            }
             <CardControls recipe={recipe} />
         </Box>
         }
