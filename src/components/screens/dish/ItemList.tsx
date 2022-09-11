@@ -15,7 +15,7 @@ const ItemList = ({items}: {items: IEquipment[] | IIngredient[]}): JSX.Element =
             items.map((el, i) => <Tooltip key={i} label={<Box>
                 <Image src={`https://spoonacular.com/cdn/ingredients_100x100/${el.image}`} />
             </Box>}>
-                <Text _hover={{textDecoration: 'underline', cursor: 'pointer'}} onClick={searchItem(el.name)}>{i !== items.length-1 ? `${el.name}, ` : el.name}</Text>
+                <Text _hover={{textDecoration: 'underline', cursor: 'pointer'}} onClick={searchItem(el.name)}>{i !== items.length-1 ? `${el.name},` : el.name}</Text>
             </Tooltip>)
         }
         </Flex>

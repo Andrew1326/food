@@ -11,7 +11,6 @@ import ScrollToTop from '../../shared/scrollToTop/ScrollToTopBtn';
 import NoResults from '../../shared/noResults/NoResults';
  
 const Dishes = (): JSX.Element => {
-
     const [tags, setTags] = useSessionStorage<string>('tags', '')
     const [dishesUpdateNeeded, setDishesUpdateNeeded] = useSessionStorage<boolean>('dishesUpdate', true)
     const [data, setData] = useSessionStorage<IRecipes | null>('recipes', null)
