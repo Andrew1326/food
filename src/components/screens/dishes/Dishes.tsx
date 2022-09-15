@@ -12,7 +12,7 @@ import NoResults from '../../shared/noResults/NoResults';
  
 const Dishes = (): JSX.Element => {
     const [tags, setTags] = useSessionStorage<string>('tags', '')
-    const [dishesUpdateNeeded, setDishesUpdateNeeded] = useSessionStorage<boolean>('dishesUpdate', true)
+    const [dishesUpdateNeeded, setDishesUpdateNeeded] = useSessionStorage<boolean>('dishesUpdateNeeded', true)
     const [data, setData] = useSessionStorage<IRecipes | null>('recipes', null)
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState<Error | null>(null)
@@ -81,8 +81,8 @@ const Dishes = (): JSX.Element => {
                     loading ? <CenteredLoader />
                     :
                     data && data.recipes.length > 0 ? <>
-                    <RecipeList recipes={data.recipes} />
-                    <ScrollToTop />
+                        <RecipeList recipes={data.recipes} />
+                        <ScrollToTop />
                     </>
                     :
                     <NoResults />    

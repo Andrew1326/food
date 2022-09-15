@@ -16,7 +16,7 @@ const Wine = ({data}: {data: IProductMatch}): JSX.Element => {
             </Center>
         <Stack direction={['column', 'row']}>
             <Box w={['100%', '100%', '20%']}>
-                <Image src={data.imageUrl} alt='wine img' _hover={{cursor: 'pointer'}} onClick={viewWine(data.link)} />
+                <Image src={data.imageUrl} alt='wine img' loading='lazy' _hover={{cursor: 'pointer'}} onClick={viewWine(data.link)} />
                 <Text fontSize='xl'>Price: {data.price}</Text>
             </Box>
             <Text fontSize='xl' w='100%'>{data.description}</Text>

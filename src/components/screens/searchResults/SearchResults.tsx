@@ -25,15 +25,15 @@ const SearchResults = (): JSX.Element => {
             </Center>
             {
                 error ? <ServerErr />
-                    :
-                    loading ? <CenteredLoader />
-                    :
-                    data && data.results.length > 0 ? <>
+                :
+                loading ? <CenteredLoader />
+                :
+                data && data.results.length > 0 ? <>
                     <RecipeList recipes={data.results} />
                     <ScrollToTop />
-                    </>
-                    :
-                    <NoResults />
+                </>
+                :
+                <NoResults />
             }
         </Box>
     )

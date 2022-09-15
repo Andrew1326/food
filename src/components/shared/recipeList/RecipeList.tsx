@@ -9,7 +9,7 @@ const RecipeList = ({recipes}: {recipes: IRecipe[] | ISearchRecipe[]}): JSX.Elem
         <>
         <Flex marginTop='3%' justifyContent='space-evenly' alignItems='center' flexWrap='wrap'>
             {
-                 recipes.map((el, i) => <RecipeCard key={i} recipe={el} />)
+                recipes.map((el, i) => <RecipeCard key={i} recipe={el} />)
             }
         </Flex>
         </>

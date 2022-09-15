@@ -59,7 +59,7 @@ const Pairing = (): JSX.Element => {
                 :
                 loading ? <CenteredLoader />
                 :
-                data && data.pairedWines ? <Box marginTop='5%'>
+                data && data.pairedWines.length > 0 ? <Box marginTop='5%'>
                 <VStack>
                 <Stack direction={['column', 'row']} fontSize='180%'>
                     <b>Paired wines:</b>

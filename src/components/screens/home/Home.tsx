@@ -1,5 +1,5 @@
-import { Box, Heading, Image, VStack, Flex, Stack, useMediaQuery } from '@chakra-ui/react';
-import React from 'react';
+import { Box, Heading, Image, VStack, Flex, Stack, useMediaQuery, Button } from '@chakra-ui/react';
+import React, { MouseEventHandler } from 'react';
 import food1Src from '../../../images/food_1.jpg';
 import food2Src from '../../../images/food_2.jpg';
 import food3Src from '../../../images/food_3.jpg';
@@ -8,8 +8,11 @@ import food5Src from '../../../images/food_5.jpg';
 import food6Src from '../../../images/food_6.jpg';
 import { TImage } from '../../../appTypes';
 import Video from '../../shared/video/Video';
+import { useNavigate } from 'react-router-dom';
 
 const Home = (): JSX.Element => {
+
+    const navigate = useNavigate()
 
     //* media queries
     const [isLargerThan320] = useMediaQuery('(min-width: 320px)')
@@ -43,6 +46,9 @@ const Home = (): JSX.Element => {
 
     const foodCollection = createFoodCollection()
 
+    //* navigate to dishes page
+    const navigateToDishes: MouseEventHandler<HTMLButtonElement> = () => navigate('/dishes')
+ 
     return (
         <Box w='100%' p='0 4% 2% 4%' marginTop={['18%', '10%', '5%']} color='gray.600'>
             <VStack>
@@ -73,7 +79,7 @@ const Home = (): JSX.Element => {
                         }
                     </Stack>)
                 }
-
+                <Button colorScheme='green' size='lg' w={['95%', '70%', '40%']} onClick={navigateToDishes}>start exploring</Button>
             </VStack>
         </Box>
     )
