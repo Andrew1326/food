@@ -51,7 +51,7 @@ const CardControls = ({recipe}: {recipe: IRecipe | ISearchRecipe}): JSX.Element 
     return (
         <Center>
             {
-                getItemState() === 'saved' ? <Button w='80%' onClick={deleteItem} colorScheme='orange' _focus={{border: 'none'}}><DeleteIcon {...iconProps} /></Button> : <Button w='80%' onClick={saveItem} colorScheme='green' _focus={{border: 'none'}}><AddIcon {...iconProps} /></Button>
+                getItemState() === 'saved' ? <Button w={['100%', '90%', '80%']} onClick={deleteItem} colorScheme='orange' _focus={{border: 'none'}}><DeleteIcon {...iconProps} /></Button> : <Button w={['100%', '90%', '80%']} onClick={saveItem} colorScheme='green' _focus={{border: 'none'}}><AddIcon {...iconProps} /></Button>
             }
         </Center>
     )
