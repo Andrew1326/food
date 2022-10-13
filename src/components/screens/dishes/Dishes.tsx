@@ -1,5 +1,5 @@
 import { Box, Button, Center, FormControl, Heading, HStack, Input, Image, Flex } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import CenteredLoader from '../../shared/loader/CenteredLoader';
 import ServerErr from '../../shared/server_err/ServerErr';
 import { IRecipes, TFormValue } from './dishesTypes';
@@ -9,37 +9,14 @@ import { apiKey } from '../../../constants';
 import useSessionStorage from '../../../hooks/useSessionStorage';
 import ScrollToTop from '../../shared/scrollToTop/ScrollToTopBtn';
 import NoResults from '../../shared/noResults/NoResults';
+import useFetch from '../../../hooks/useFetch';
  
 const Dishes = (): JSX.Element => {
     const [tags, setTags] = useSessionStorage<string>('tags', '')
-    const [dishesUpdateNeeded, setDishesUpdateNeeded] = useSessionStorage<boolean>('dishesUpdateNeeded', true)
-    const [data, setData] = useSessionStorage<IRecipes | null>('recipes', null)
-    const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState<Error | null>(null)
+    const [dishesUpdateNeeded, setDishesUpdateNeeded] = useState<boolean>(false)
 
-    //* fetching dishes
-    const getDishes = async () => {
-        try {
-            setLoading(true)
-
-            const res = await fetch(`https://api.spoonacular.com/recipes/random?tags=${tags}&number=100&apiKey=${apiKey}`)
-            const recipes: IRecipes = await res.json()
-
-            setData(recipes)
-
-        } catch(err) {
-            setError(err as Error)
-
-        } finally {
-            setLoading(false)
-            setDishesUpdateNeeded(false)
-        }
-    }
-
-    useEffect(() => {
-        dishesUpdateNeeded && getDishes()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [tags])
+    const url = `https://api.spoonacular.com/recipes/random?number=100&apiKey=${apiKey}${tags ? `&tags=${tags}` : ''}`
+    const { data, loading, error } = useFetch<IRecipes>(url, [dishesUpdateNeeded])
 
     //* react-hook-form
     const { handleSubmit, control } = useForm<TFormValue>()
