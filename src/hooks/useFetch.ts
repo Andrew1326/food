@@ -1,37 +1,91 @@
-import { useEffect, useState, DependencyList } from 'react';
+import { DependencyList, useEffect, useReducer, useRef } from 'react'
 
-const useFetch = <T>(url: string, dependencyList?: DependencyList): {data: T | undefined, loading: boolean, error: any} => {
-  const [data, setData] = useState<T>()
-  const [loading, setLoading] = useState<boolean>(false)
-  const [error, setError] = useState<any>()
+interface State<T> {
+  data?: T,
+  loading: boolean,
+  error?: Error
+}
 
-  //* fetching
+type Cache<T> = { [url: string]: T }
+
+// discriminated union type
+type Action<T> =
+  | { type: 'loading' }
+  | { type: 'fetched'; payload: T }
+  | { type: 'error'; payload: Error }
+
+function useFetch<T = unknown>(url: string, deps?: DependencyList, options?: RequestInit): State<T> {
+  const cache = useRef<Cache<T>>({})
+
+  // Used to prevent state update if the component is unmounted
+  const cancelRequest = useRef<boolean>(false)
+
+  const initialState: State<T> = {
+    error: undefined,
+    loading: false,
+    data: undefined,
+  }
+
+  // Keep state logic separated
+  const fetchReducer = (state: State<T>, action: Action<T>): State<T> => {
+    switch (action.type) {
+      case 'loading':
+        return { ...initialState, loading: true }
+      case 'fetched':
+        return { ...initialState, data: action.payload, loading: false }
+      case 'error':
+        return { ...initialState, error: action.payload, loading: false }
+      default:
+        return state
+    }
+  }
+
+  const [state, dispatch] = useReducer(fetchReducer, initialState)
+
   useEffect(() => {
+    // Do nothing if the url is not given
+    if (!url) return
+
+    cancelRequest.current = false
+
     const fetchData = async () => {
+      dispatch({ type: 'loading' })
+
+      // If a cache exists for this url, return it
+      if (cache.current[url]) {
+        dispatch({ type: 'fetched', payload: cache.current[url] })
+        return
+      }
+
       try {
-        setLoading(true)
+        const response = await fetch(url, options)
+        if (!response.ok) {
+          throw new Error(response.statusText)
+        }
 
-        const res = await fetch(url)
+        const data = (await response.json()) as T
+        cache.current[url] = data
+        if (cancelRequest.current) return
 
-        if (res.status === 402) setError(true)
+        dispatch({ type: 'fetched', payload: data })
+      } catch (error) {
+        if (cancelRequest.current) return
 
-        const resData = await res.json()
-        setData(resData)
-
-      } catch (err: any) {
-        setError(err)
-
-      } finally {
-        setLoading(false)
+        dispatch({ type: 'error', payload: error as Error })
       }
     }
 
-    url && fetchData()
+    void fetchData()
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, dependencyList ? [...dependencyList, url] : [url])
+    // Use the cleanup function for avoiding a possibly...
+    // ...state update after the component was unmounted
+    return () => {
+      cancelRequest.current = true
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps ? [...deps, url] : [url])
 
-  return {data, loading, error}
+  return state
 }
 
 export default useFetch

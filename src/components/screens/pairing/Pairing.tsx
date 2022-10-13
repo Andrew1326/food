@@ -1,5 +1,5 @@
-import { Box, Button, Center, FormControl, Heading, FormLabel, Input, Stack, Text, Flex, VStack } from '@chakra-ui/react';
 import React from 'react';
+import { Box, Button, Center, FormControl, Heading, FormLabel, Input, Stack, Text, Flex, VStack } from '@chakra-ui/react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { createSearchParams } from '../../../functions';
 import { apiKey } from '../../../constants';
@@ -11,6 +11,7 @@ import ServerErr from '../../shared/server_err/ServerErr';
 import CenteredLoader from '../../shared/loader/CenteredLoader';
 import NoResults from '../../shared/noResults/NoResults';
 import Wine from '../wines/Wine';
+import ScrollToTop from '../../shared/scrollToTop/ScrollToTop';
 
 const Pairing = (): JSX.Element => {
 
@@ -59,7 +60,9 @@ const Pairing = (): JSX.Element => {
                 :
                 loading ? <CenteredLoader />
                 :
-                data && data.pairedWines.length > 0 ? <Box marginTop='5%'>
+                data && data.pairedWines && data.pairedWines.length > 0 ? <>
+                <ScrollToTop />
+                <Box marginTop='5%'>
                 <VStack>
                 <Stack direction={['column', 'row']} fontSize='180%'>
                     <b>Paired wines:</b>
@@ -73,6 +76,7 @@ const Pairing = (): JSX.Element => {
                 </VStack>
                 <Wine data={data.productMatches[0]} />
                 </Box>
+                </>
                 :
                 <NoResults />
             }

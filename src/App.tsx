@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import { TRoute } from './appTypes';
 import Navbar from './components/navbar/Navbar';
 import CenteredLoader from './components/shared/loader/CenteredLoader';
-import ScrollToTop from './components/shared/scrollToTop/ScrollToTop';
 import RecipeProvider from './contexts/RecipeContext';
 import SavedProvider from './contexts/SavedContext';
 
@@ -44,7 +43,6 @@ const App = (): JSX.Element => {
     <Navbar />
     <RecipeProvider>
     <Suspense fallback={<CenteredLoader />}>
-      <ScrollToTop />
       <Routes>
         {
           routes.map((el, i) => <Route key={i} path={el.to} element={el.elem} />)

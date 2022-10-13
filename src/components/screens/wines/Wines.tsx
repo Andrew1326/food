@@ -1,5 +1,5 @@
 import { Box, Heading, Input, FormControl, Button, Select, Center, FormLabel, Stack } from '@chakra-ui/react';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { IRecommendedWines, TEnteringType, TFormValue } from './wineTypes';
 import useSessionStorage from '../../../hooks/useSessionStorage';
@@ -9,13 +9,13 @@ import CenteredLoader from '../../shared/loader/CenteredLoader';
 import Wine from './Wine';
 import useFetch from '../../../hooks/useFetch';
 import { TSelectOption } from '../../../appTypes';
-import { wineTypes } from './winesData';
+import { wineTypesJSON } from './winesData';
 import ScrollToTop from '../../shared/scrollToTop/ScrollToTopBtn';
 import NoResults from '../../shared/noResults/NoResults';
 
 const WinePairing = (): JSX.Element => {
 
-    const [enteringType, setEnteringType] = useState<TEnteringType>('input')
+    const [enteringType, setEnteringType] = useSessionStorage<TEnteringType>('enteringType', 'input')
     const [wineType, setWineType] = useSessionStorage('wineType', '')
     const url = wineType ? `https://api.spoonacular.com/food/wine/recommendation?wine=${wineType}&number=100&apiKey=${apiKey}` : ''
 
@@ -32,6 +32,9 @@ const WinePairing = (): JSX.Element => {
         {name: 'input', value: 'input'},
         {name: 'select', value: 'select'}
     ] 
+
+    //* parsed wine types
+    const wineTypes: string[] = JSON.parse(wineTypesJSON)
 
     //* changing entering type
     const changeEnteringType = (e: ChangeEvent<HTMLSelectElement>): void => setEnteringType(e.target.value as TEnteringType)
@@ -81,11 +84,11 @@ const WinePairing = (): JSX.Element => {
                     :
                     loading ? <CenteredLoader />
                     :
-                    data && data.recommendedWines ? <>
+                    data && data.recommendedWines.length > 0 ? <>
+                    <ScrollToTop />
                     {
                         data.recommendedWines.map((el, i) => <Wine key={i} data={el} />)
                     }
-                    <ScrollToTop />
                     </>
                     :
                     <NoResults />
