@@ -1,6 +1,6 @@
 import { Box, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, VStack } from '@chakra-ui/react';
 import React from 'react';
-import Links from '../shared/links/Links';
+import Links from '../shared/Links';
 import { links } from '../../App';
 
 type TProps = {
@@ -8,7 +8,7 @@ type TProps = {
     onClose: () => void
 }
 
-const OffCanvas = ({isOpen, onClose}: TProps): JSX.Element => {
+const OffCanvas = ({ isOpen, onClose }: TProps): JSX.Element => {
     return (
         <Drawer isOpen={isOpen} onClose={onClose} placement='left'>
             <DrawerOverlay />

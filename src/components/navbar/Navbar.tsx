@@ -1,6 +1,6 @@
 import { Box, Flex, Heading, HStack, useMediaQuery } from '@chakra-ui/react';
 import React from 'react';
-import Links from '../shared/links/Links';
+import Links from '../shared/Links';
 import { links } from '../../App';
 import { SearchIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { useDisclosure } from '@chakra-ui/react';
@@ -18,7 +18,7 @@ const Navbar = (): JSX.Element => {
     const [isSmallerThan480] = useMediaQuery('(max-width: 480px)')
 
     //* props
-    const offCanvasProps = {isOpen, onClose}
+    const offCanvasProps = { isOpen, onClose }
 
     return (
         <>

@@ -1,9 +1,14 @@
 import React from 'react';
 import { Box, Text, Tooltip, Image, Flex } from '@chakra-ui/react';
-import { IEquipment, IIngredient } from './dishTypes';
-import useWindow from '../../../hooks/useWindow';
+import { IEquipment, IIngredient } from './screens/dish/dishTypes';
+import useWindow from '../hooks/useWindow';
 
-const ItemList = ({items}: {items: IEquipment[] | IIngredient[]}): JSX.Element => {
+type TProps = {
+    items: IEquipment[] | IIngredient[],
+    type: 'equipment' | 'ingredients'
+}
+
+const RecipeItems = ({ items, type }: TProps): JSX.Element => {
 
     //* opening item in new window
     const setUrl = useWindow()
@@ -13,7 +18,7 @@ const ItemList = ({items}: {items: IEquipment[] | IIngredient[]}): JSX.Element =
         <Flex justifyContent='flex-start' alignItems='center' flexDirection='row' flexWrap='wrap'>
         {
             items.map((el, i) => <Tooltip key={i} label={<Box>
-                <Image src={`https://spoonacular.com/cdn/ingredients_100x100/${el.image}`} />
+                <Image src={`https://spoonacular.com/cdn/${type}_100x100/${el.image}`} />
             </Box>}>
                 <Text _hover={{textDecoration: 'underline', cursor: 'pointer'}} onClick={searchItem(el.name)}>{i !== items.length-1 ? `${el.name},` : el.name}</Text>
             </Tooltip>)
@@ -22,4 +27,4 @@ const ItemList = ({items}: {items: IEquipment[] | IIngredient[]}): JSX.Element =
     )
 }
 
-export default ItemList
+export default RecipeItems

@@ -4,14 +4,14 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { IRecommendedWines, TEnteringType, TFormValue } from './wineTypes';
 import useSessionStorage from '../../../hooks/useSessionStorage';
 import { apiKey } from '../../../constants';
-import ServerErr from '../../shared/server_err/ServerErr';
+import ServerErr from '../../shared/ServerErr';
 import CenteredLoader from '../../shared/loader/CenteredLoader';
 import Wine from './Wine';
 import useFetch from '../../../hooks/useFetch';
 import { TSelectOption } from '../../../appTypes';
 import { wineTypesJSON } from './winesData';
 import ScrollToTop from '../../shared/scrollToTop/ScrollToTopBtn';
-import NoResults from '../../shared/noResults/NoResults';
+import NoResults from '../../shared/NoResults';
 
 const WinePairing = (): JSX.Element => {
 

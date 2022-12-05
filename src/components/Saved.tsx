@@ -1,12 +1,12 @@
 import { Box, Center, Heading, VStack } from '@chakra-ui/react';
 import React from 'react';
-import { useSaved } from '../../../contexts/SavedContext';
-import useInput from '../../../hooks/useInput';
-import RecipeList from '../../shared/recipeList/RecipeList';
-import ScrollToTop from '../../shared/scrollToTop/ScrollToTopBtn';
-import Video from '../../shared/video/Video';
-import { IRecipe } from '../dish/dishTypes';
-import { createLower } from '../../../functions';
+import { useSaved } from '../contexts/SavedContext';
+import useInput from '../hooks/useInput';
+import RecipeList from './shared/RecipeList';
+import ScrollToTop from './shared/scrollToTop/ScrollToTopBtn';
+import Video from './shared/Video';
+import { IRecipe } from './screens/dish/dishTypes';
+import { createLower } from '../functions';
 
 const Saved = (): JSX.Element => {
 
@@ -41,7 +41,7 @@ const Saved = (): JSX.Element => {
                 :
                 <>
                 <VStack>
-                    <Video src={require('../../../videos/empty_list.mp4')} />
+                    <Video src={require('../videos/empty_list.mp4')} />
                     <Heading size='lg'>List is empty...</Heading>
                 </VStack>
                 </>

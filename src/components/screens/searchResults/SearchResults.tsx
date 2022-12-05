@@ -3,10 +3,10 @@ import React from 'react';
 import { apiKey } from '../../../constants';
 import useFetch from '../../../hooks/useFetch';
 import CenteredLoader from '../../shared/loader/CenteredLoader';
-import NoResults from '../../shared/noResults/NoResults';
-import RecipeList from '../../shared/recipeList/RecipeList';
+import NoResults from '../../shared/NoResults';
+import RecipeList from '../../shared/RecipeList';
 import ScrollToTop from '../../shared/scrollToTop/ScrollToTopBtn';
-import ServerErr from '../../shared/server_err/ServerErr';
+import ServerErr from '../../shared/ServerErr';
 import { ISearchRecipes } from './searchResultsTypes';
 
 const SearchResults = (): JSX.Element => {

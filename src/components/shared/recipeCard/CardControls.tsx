@@ -1,11 +1,11 @@
 import { DeleteIcon } from '@chakra-ui/icons';
 import { AddIcon } from '@chakra-ui/icons';
-import { Button, Center, useToast, UseToastOptions } from '@chakra-ui/react';
+import { Button, Center, useToast } from '@chakra-ui/react';
 import React, { MouseEventHandler } from 'react';
 import { useSaved, useSavedUpdate } from '../../../contexts/SavedContext';
 import { IRecipe } from '../../screens/dish/dishTypes';
 import { ISearchRecipe } from '../../screens/searchResults/searchResultsTypes';
-import { defaultToastOptions } from '../../../functions';
+import { savedToast, deletedToast } from '../../../toasts';
 
 const CardControls = ({recipe}: {recipe: IRecipe | ISearchRecipe}): JSX.Element => {
 
@@ -15,20 +15,6 @@ const CardControls = ({recipe}: {recipe: IRecipe | ISearchRecipe}): JSX.Element 
 
     //* toasts
     const toast = useToast()
-
-    const savedToast: UseToastOptions = {
-        title: 'Saved successfully!',
-        description: 'Dish was added to saved.',
-        status: 'success',
-        ...defaultToastOptions
-    } 
-
-    const deletedToast: UseToastOptions = {
-        title: 'Deleted successfully!',
-        description: 'Dish was deleted from saved.',
-        status: 'warning',
-        ...defaultToastOptions
-    }
 
     //* get item state
     const getItemState = (): 'saved' | 'not saved' => saved.filter(el => el.id === recipe.id).length > 0 ? 'saved' : 'not saved'

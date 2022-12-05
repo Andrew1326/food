@@ -1,14 +1,14 @@
 import { Box, Button, Center, FormControl, Heading, HStack, Input, Image, Flex } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import CenteredLoader from '../../shared/loader/CenteredLoader';
-import ServerErr from '../../shared/server_err/ServerErr';
+import ServerErr from '../../shared/ServerErr';
 import { IRecipes, TFormValue } from './dishesTypes';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import RecipeList from '../../shared/recipeList/RecipeList';
+import RecipeList from '../../shared/RecipeList';
 import { apiKey } from '../../../constants';
 import useSessionStorage from '../../../hooks/useSessionStorage';
 import ScrollToTop from '../../shared/scrollToTop/ScrollToTopBtn';
-import NoResults from '../../shared/noResults/NoResults';
+import NoResults from '../../shared/NoResults';
 import useFetch from '../../../hooks/useFetch';
  
 const Dishes = (): JSX.Element => {

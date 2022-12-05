@@ -3,7 +3,11 @@ import { IProductMatch } from '../dish/dishTypes';
 import { Stack, Box, Image, Text, Center, Heading } from '@chakra-ui/react';
 import useWindow from '../../../hooks/useWindow';
 
-const Wine = ({data}: {data: IProductMatch}): JSX.Element => {
+type TProps = {
+    data: IProductMatch
+}
+
+const Wine = ({ data }: TProps): JSX.Element => {
 
     //* opening item in new window
     const setUrl = useWindow()

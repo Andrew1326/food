@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import { TLinks } from '../../../appTypes';
+import { TLinks } from '../../appTypes';
 
 type TProps = TLinks & { closeOffcanvas?: () => void }
 

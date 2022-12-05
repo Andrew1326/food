@@ -7,9 +7,9 @@ import useFetch from '../../../hooks/useFetch';
 import useSessionStorage from '../../../hooks/useSessionStorage';
 import { IWinePairing } from '../dish/dishTypes';
 import { TFormValues } from './pairingTypes';
-import ServerErr from '../../shared/server_err/ServerErr';
+import ServerErr from '../../shared/ServerErr';
 import CenteredLoader from '../../shared/loader/CenteredLoader';
-import NoResults from '../../shared/noResults/NoResults';
+import NoResults from '../../shared/NoResults';
 import Wine from '../wines/Wine';
 import ScrollToTop from '../../shared/scrollToTop/ScrollToTop';
 

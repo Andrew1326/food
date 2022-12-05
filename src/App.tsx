@@ -7,15 +7,15 @@ import RecipeProvider from './contexts/RecipeContext';
 import SavedProvider from './contexts/SavedContext';
 
 //* lazy import
-const Home = lazy(() => import('./components/screens/home/Home'))
+const Home = lazy(() => import('./components/Home'))
 const Dishes = lazy(() => import('./components/screens/dishes/Dishes'))
 const Dish = lazy(() => import('./components/screens/dish/Dish'))
 const Pairing = lazy(() => import('./components/screens/pairing/Pairing'))
 const Wines = lazy(() => import('./components/screens/wines/Wines'))
-const Saved = lazy(() => import('./components/screens/saved/Saved'))
+const Saved = lazy(() => import('./components/Saved'))
 const Search = lazy(() => import('./components/screens/search/Search'))
 const SearchResults = lazy(() => import('./components/screens/searchResults/SearchResults'))
-const NotFound = lazy(() => import('./components/screens/notFound/NotFound'))
+const NotFound = lazy(() => import('./components/NotFound'))
 
 //* routes
 const routes: TRoute[] = [
